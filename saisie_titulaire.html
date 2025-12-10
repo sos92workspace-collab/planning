@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOS92 · Souhaits Titulaire</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="flex-between">
+    <div>
+      <h1>Souhaits de gardes · Titulaire</h1>
+      <p class="small">Déclarez vos créneaux prioritaires. L'ordre est utilisé pour arbitrer.</p>
+    </div>
+    <button id="logout">Se déconnecter</button>
+  </header>
+  <main>
+    <div class="card">
+      <h2>Déclarer un souhait</h2>
+      <form id="wish-form">
+        <label>Créneau
+          <select name="shift_column_id" id="shift-select" required></select>
+        </label>
+        <label>Priorité (1 = très prioritaire)
+          <input name="priority" type="number" min="1" max="5" value="3" required />
+        </label>
+        <label>Commentaire optionnel
+          <textarea name="note" rows="2" placeholder="Préférence personnelle, contrainte, etc."></textarea>
+        </label>
+        <button type="submit">Ajouter le souhait</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <div class="flex-between">
+        <h2>Mes souhaits</h2>
+        <span class="badge" id="wish-count">0</span>
+      </div>
+      <table class="table" id="wish-table">
+        <thead>
+          <tr><th>Créneau</th><th>Début</th><th>Fin</th><th>Priorité</th><th>Commentaire</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+  <script type="module" src="js/saisie_titulaire.js"></script>
+</body>
+</html>
