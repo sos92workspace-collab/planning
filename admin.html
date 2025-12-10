@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOS92 · Administration</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="flex-between">
+    <div>
+      <h1>Administration SOS92</h1>
+      <p class="small">Gestion des médecins, créneaux et récapitulatif des souhaits.</p>
+    </div>
+    <button id="logout">Se déconnecter</button>
+  </header>
+  <main>
+    <section class="grid">
+      <div class="card">
+        <h2>Ajouter un médecin</h2>
+        <form id="doctor-form">
+          <label>ID utilisateur (UUID Supabase Auth)
+            <input name="id" required placeholder="copiez l'UUID depuis Supabase Auth" />
+          </label>
+          <label>Nom complet
+            <input name="full_name" required placeholder="Dr Jeanne Dupont" />
+          </label>
+          <label>Email
+            <input name="email" type="email" required />
+          </label>
+          <label>Rôle
+            <select name="role" required>
+              <option value="titulaire">Titulaire / Associé</option>
+              <option value="remplacant">Remplaçant</option>
+            </select>
+          </label>
+          <label>Priorité (1 = très prioritaire)
+            <input name="priority_index" type="number" min="1" max="5" value="3" />
+          </label>
+          <button type="submit">Enregistrer</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Configurer les colonnes de planning</h2>
+        <form id="column-form">
+          <label>Libellé colonne
+            <input name="label" required placeholder="Nuit A, Nuit B, Urgences..." />
+          </label>
+          <label>Début
+            <input name="start_at" type="datetime-local" required />
+          </label>
+          <label>Fin
+            <input name="end_at" type="datetime-local" required />
+          </label>
+          <label>
+            <input name="allowed_remplacant" type="checkbox" /> Autoriser les remplaçants
+          </label>
+          <button type="submit">Créer le créneau</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="card">
+      <div class="flex-between">
+        <h2>Médecins</h2>
+        <span class="badge" id="doctor-count">0 médecin</span>
+      </div>
+      <table class="table" id="doctor-table">
+        <thead>
+          <tr><th>Nom</th><th>Email</th><th>Rôle</th><th>Priorité</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="flex-between">
+        <h2>Colonnes ouvertes</h2>
+        <span class="badge" id="column-count">0 créneau</span>
+      </div>
+      <table class="table" id="column-table">
+        <thead>
+          <tr><th>Libellé</th><th>Début</th><th>Fin</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Récapitulatif des souhaits</h2>
+      <p class="small">Vue simple pour vérifier les préférences saisies par les médecins.</p>
+      <table class="table" id="recap-table">
+        <thead>
+          <tr><th>Médecin</th><th>Créneau</th><th>Priorité</th><th>Commentaire</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
